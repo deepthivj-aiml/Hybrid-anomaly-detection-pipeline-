@@ -1,0 +1,29 @@
+Anomaly-Detection/
+├── README.md
+├── requirements.txt
+├── .gitignore
+├── notebooks/
+│   └── Anomaly_Detection_Pipeline.ipynb
+├── data/
+│   ├── raw/                # raw downloaded datasets (not checked into git)
+│   └── processed/          # cleaned / sampled datasets
+├── src/
+│   ├── __init__.py
+│   ├── config.py
+│   ├── data/
+│   │   └── load_data.py
+│   ├── preprocessing/
+│   │   └── feature_engineering.py
+│   ├── models/
+│   │   ├── autoencoder.py
+│   │   └── judge.py
+│   ├── training/
+│   │   └── train_pipeline.py
+│   ├── evaluation/
+│   │   └── evaluate.py
+│   └── utils.py
+├── scripts/
+│   └── run_pipeline.sh
+└── .github/
+    └── workflows/
+        └── python-app.yml

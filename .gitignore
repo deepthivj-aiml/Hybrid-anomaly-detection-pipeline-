@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+
+# Data and artifacts
+data/raw/
+data/processed/
+artifacts/
+*.csv
+
+# Jupyter
+.ipynb_checkpoints
+
+# Virtual env
+.env/
+venv/
