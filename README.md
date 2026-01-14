@@ -12,6 +12,9 @@ Key components:
 
 This hybrid approach aims to improve detection accuracy and reduce false positives compared to heuristics-only systems.
 
+Working Notebook:https://github.com/deepthivj-aiml/Hybrid-anomaly-detection-pipeline-/blob/main/Anomaly_Detection_Pipeline.ipynb
+Project structure: Work in progress
+
 ---
 
 ## 🎯 Objectives
@@ -53,13 +56,59 @@ This hybrid approach aims to improve detection accuracy and reduce false positiv
 ---
 
 ## Repository structure
-- `notebooks/` — demos and Colab-friendly walkthroughs  
-- `src/` — core modules (data, preprocessing, models, training, evaluation)  
-- `scripts/` — convenience scripts (data download, run pipeline, training steps)  
-- `config/` — YAML configs for experiments  
-- `data/` — raw & processed datasets (not checked in)  
-- `artifacts/` — default output (trained models, scalers, reports)  
-- `.github/workflows/` — CI (tests & lint)
+Hybrid-Anomaly-Detection-Pipeline/
+│
+├── config/
+│   ├── config.yaml            # Main pipeline config
+│   ├── autoencoder.yaml       # Autoencoder-specific params
+│   ├── judge.yaml             # XGBoost judge params
+│   └── infer.yaml             # Inference / embedding generation params
+│
+├── data/
+│   ├── raw/                   # Place raw dataset CSVs here
+│   │   └── creditcard_50k.csv
+│   └── processed/             # Optional: preprocessed train/val/test splits
+│
+├── src/
+│   ├── config.py              # Constants: DATA_URL, paths, AE_EPOCHS, etc.
+│   ├── data/
+│   │   └── load_data.py       # download_dataset(), load_sample(n_samples)
+│   ├── preprocessing/
+│   │   └── feature_engineering.py  # heuristic_labeling(df), extract_features(df)
+│   ├── models/
+│   │   ├── autoencoder.py     # AE nn.Module
+│   │   └── judge.py           # create_xgb_classifier() → returns XGBClassifier
+│   ├── training/
+│   │   └── train_pipeline.py  # run_pipeline() orchestrator
+│   └── evaluation/
+│       └── evaluate.py        # evaluate_model(), plot_ae_errors()
+│
+├── scripts/
+│   ├── download_openml_subset.py  # Downloads demo subset
+│   ├── run_pipeline.sh            # Run entire pipeline
+│   ├── train_autoencoder.py       # Train only AE
+│   ├── generate_embeddings.py     # Extract embeddings
+│   ├── train_judge.py             # Train only XGBoost judge
+│   └── evaluate.py                # Evaluation script
+│
+├── notebooks/
+│   └── Anomaly_Detection_Pipeline.ipynb  # End-to-end demo / Colab-friendly
+│
+├── artifacts/
+│   ├── autoencoder/  # AE checkpoints, logs
+│   ├── judge/        # XGB model dumps, pipeline metadata
+│   ├── features/     # Dataset + embeddings + recon errors
+│   └── reports/      # Metrics, plots
+│
+├── .github/
+│   └── workflows/
+│       ├── lint.yml
+│       └── test.yml
+│
+├── requirements.txt
+├── README.md
+└── LICENSE
+
 
 ---
 
